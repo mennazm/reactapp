@@ -3,6 +3,7 @@ import axiosInstance from '../../Api/ExamApi';
 
 const initialState = {
   questions: [],
+  selectedQuestion: null, 
   status: 'idle',
   error: null,
 };
@@ -19,11 +20,21 @@ export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async
   }
 });
 
+export const fetchQuestionById = createAsyncThunk('questions/fetchQuestionById', async (questionId) => {
+    try {
+      const response = await axiosInstance.get(`/questions/${questionId}`);
+    console.log(response.data);
+
+      return response.data; 
+    } catch (error) {
+      throw Error('Failed to fetch question details');
+    }
+  });
 // Define thunk for adding new question
 export const addNewQuestion = createAsyncThunk('questions/addNewQuestion', async (questionData) => {
   try {
     const response = await axiosInstance.post('/questions', questionData);
-    return response.data.question;
+    return response.data;
   } catch (error) {
     throw Error('Failed to add new question');
   }
@@ -33,7 +44,7 @@ export const addNewQuestion = createAsyncThunk('questions/addNewQuestion', async
 export const updateQuestion = createAsyncThunk('questions/updateQuestion', async (questionData) => {
   try {
     const response = await axiosInstance.put(`/questions/${questionData.id}`, questionData);
-    return response.data.question;
+    return response.data;
   } catch (error) {
     throw Error('Failed to update question');
   }
@@ -52,7 +63,11 @@ export const deleteQuestion = createAsyncThunk('questions/deleteQuestion', async
 const questionsSlice = createSlice({
   name: 'questions',
   initialState,
-  reducers: {},
+  reducers: {
+    clearSelectedQuestion(state) {
+        state.selectedQuestion = null;
+      },
+  },
   extraReducers: (builder) => {
     // Handle fetch questions actions
     builder
@@ -112,8 +127,24 @@ const questionsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       });
+      builder
+      .addCase(fetchQuestionById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchQuestionById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.selectedQuestion = action.payload; 
+      })
+      .addCase(fetchQuestionById.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
+
   },
+  
 });
 
 export default questionsSlice.reducer;
+export const { clearSelectedQuestion } = questionsSlice.actions;
+
 export const { clearError } = questionsSlice.actions;

@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './Auth/Login';
 
-import QuestionsComp from './Components/admin/QuestionsComp';
+import QuestionsComp from './Components/admin/Questions/QuestionsComp';
 import { NotFoundedComp } from './Components/NotFoundedComp';
 import { ErrorComp } from './Components/ErrorComp';
 import { SharedLayout } from './Components/admin/SharedLayout';
