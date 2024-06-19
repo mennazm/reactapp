@@ -1,0 +1,41 @@
+.All_questions {
+    width: 63vw;
+}
+
+.All_questions h3 {
+    color: #093B56;
+}
+
+
+
+
+
+
+.table>thead {
+    --bs-table-bg: #093B56 !important; 
+    --bs-table-color: white !important; 
+}
+
+.custom-table tbody tr {
+    transition: background-color 0.3s;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #e9ecef; 
+}
+
+.add_icon {
+    font-size: 35px;
+    color: #093B56;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.add_icon:hover {
+    color: #052d42;
+    transform: scale(1.1);
+}
+.btn svg{
+    font-size: 22px;
+
+}

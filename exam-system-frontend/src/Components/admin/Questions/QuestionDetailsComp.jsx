@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuestionById, clearSelectedQuestion } from '../../../store/questions/questionsSlice';
+import '../../../css/Questions/QuestionDetailsComp.css';
+
+
 
 const QuestionDetailsComp = ({ questionId, onBack }) => {
   const dispatch = useDispatch();
@@ -27,16 +30,16 @@ const QuestionDetailsComp = ({ questionId, onBack }) => {
   }
 
   return (
-    <div>
-      <h2>Question Details</h2>
+    <div className="question-details-container">
+      <h3 className="question-details-title">Question Details</h3>
       {question ? (
-        <div>
+        <div className="question-details-content">
           <p><strong>Question:</strong> {question.question}</p>
           <p><strong>Answer:</strong> {question.answer}</p>
-          <button onClick={onBack}>Back to Questions</button>
+          <button onClick={onBack} className="question-details-button">Back to Questions</button>
         </div>
       ) : (
-        <div>No question details available</div>
+        <div className='h3 alert alert-danger'>No question details available</div>
       )}
     </div>
   );

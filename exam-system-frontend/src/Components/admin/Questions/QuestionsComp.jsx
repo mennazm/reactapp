@@ -4,6 +4,8 @@ import { fetchQuestions, deleteQuestion, fetchQuestionById, clearSelectedQuestio
 import AddQuestionForm from './AddQuestionForm';
 import UpdateQuestionForm from './UpdateQuestionForm';
 import QuestionDetailsComp from './QuestionDetailsComp';
+import { BiPlusCircle, BiPencil, BiTrash, BiDetail } from 'react-icons/bi'; 
+import '../../../css/Questions/QuestionsComp.css';
 
 const QuestionsComp = () => {
   const dispatch = useDispatch();
@@ -50,7 +52,7 @@ const QuestionsComp = () => {
   };
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <h3 className='alert alert-info container m-auto mt-5 w-75'>Loading...</h3>;
   }
 
   if (status === 'failed') {
@@ -58,14 +60,19 @@ const QuestionsComp = () => {
   }
 
   return (
-    <div>
-      <h2>Questions</h2>
+    <div className='m-auto mt-5 All_questions'>
       {!selectedQuestion && (
         <>
-          <button onClick={() => setShowAddForm(true)}>Add Question</button>
-          <table>
+          <div className="d-flex justify-content-between my-4">
+            <div>
+              <h3 className="m-0">All Questions</h3>
+            </div>
+            <BiPlusCircle className="add_icon" onClick={() => setShowAddForm(true)} />
+          </div>
+          <table className='custom-table table table-striped mt-4'>
             <thead>
               <tr>
+                <th>#</th>
                 <th>Question</th>
                 <th>Answer</th>
                 <th>Actions</th>
@@ -73,20 +80,27 @@ const QuestionsComp = () => {
             </thead>
             <tbody>
               {questions && questions.length > 0 ? (
-                questions.map((question) => (
+                questions.map((question,index) => (
                   <tr key={question._id}>
+                    <td>{index}</td>
                     <td>{question.question}</td>
                     <td>{question.answer}</td>
                     <td>
-                      <button onClick={() => { setEditQuestion(question); setShowUpdateForm(true); }}>Edit</button>
-                      <button onClick={() => handleDeleteQuestion(question._id)}>Delete</button>
-                      <button onClick={() => handleShowDetails(question._id)}>Details</button>
+                      <button onClick={() => { setEditQuestion(question); setShowUpdateForm(true); }} className="btn btn-outline-primary btn-sm me-2">
+                        <BiPencil />
+                      </button>
+                      <button onClick={() => handleDeleteQuestion(question._id)} className="btn btn-outline-danger btn-sm me-2">
+                        <BiTrash />
+                      </button>
+                      <button onClick={() => handleShowDetails(question._id)} className="btn btn-outline-info btn-sm">
+                        <BiDetail />
+                      </button>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="3">No questions available</td>
+                  <td colSpan="4" className='h3 alert alert-danger'>No questions available</td>
                 </tr>
               )}
             </tbody>

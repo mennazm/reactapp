@@ -8,6 +8,9 @@ import { ErrorComp } from './Components/ErrorComp';
 import { SharedLayout } from './Components/admin/SharedLayout';
 import { fetchQuestions } from './store/questions/questionsSlice';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 function App() {
   const router= createBrowserRouter(
