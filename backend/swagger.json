@@ -1,0 +1,32 @@
+{
+    "swaggerDefinition": {
+        "openapi": "3.0.0",
+        "info": {
+            "title": "Examify-System",
+            "version": "1.0.0",
+            "description": "simple exam system"
+        },
+        "servers": [
+            {
+                "url": "http://localhost:8080"
+            }
+        ],
+        "components": {
+            "securitySchemes": {
+                "jwt_auth": {
+                    "type": "http",
+                    "scheme": "bearer",
+                    "bearerFormat": "JWT"
+                }
+            }
+        },
+        "security": [
+            {
+                "jwt_auth": []
+            }
+        ]
+    },
+    "apis": [
+        "./routes/*.js"
+    ]
+}
