@@ -12,12 +12,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { fetchExams } from './store/exams/examSlice';
 import ExamsComp from './Components/admin/Exams/ExamsComp';
+import Register from './Auth/Register';
 
 
 function App() {
   const router= createBrowserRouter(
     createRoutesFromElements(
       <>
+      <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
       <Route path='/' element={<SharedLayout />}>
           <Route
