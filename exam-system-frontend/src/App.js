@@ -13,6 +13,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { fetchExams } from './store/exams/examSlice';
 import ExamsComp from './Components/admin/Exams/ExamsComp';
 import Register from './Auth/Register';
+import ResultsList from './Components/admin/Results/ResultsList';
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
       <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
       <Route path='/' element={<SharedLayout />}>
+      <Route path='admin/results' element={<ResultsList/>} />
+      
           <Route
             index
             loader={fetchQuestions}
