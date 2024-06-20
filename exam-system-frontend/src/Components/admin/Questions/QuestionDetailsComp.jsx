@@ -42,6 +42,9 @@ const QuestionDetailsComp = ({ questionId, onBack }) => {
           <div className="chat-item">
             <div className="answer"><strong>Answer:</strong> {question.answer}</div>
           </div>
+          <div className="chat-item">
+            <div className="grade"><strong>Grade:</strong> {question.grade}</div>
+          </div>
           <IoIosArrowDropleftCircle className="back-icon" onClick={onBack} />  
             </div>
       ) : (

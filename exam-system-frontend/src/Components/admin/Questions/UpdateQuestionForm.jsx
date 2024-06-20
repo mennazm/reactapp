@@ -8,10 +8,11 @@ const UpdateQuestionForm = ({ questionToEdit, onSuccess, clearEdit }) => {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState(questionToEdit.question);
   const [answer, setAnswer] = useState(questionToEdit.answer);
+  const [grade, setGrade] = useState(questionToEdit.grade);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateQuestion({ id: questionToEdit._id, question, answer }))
+    dispatch(updateQuestion({ id: questionToEdit._id, question, answer,grade }))
       .then(() => {
         onSuccess();
       });
@@ -41,7 +42,18 @@ const UpdateQuestionForm = ({ questionToEdit, onSuccess, clearEdit }) => {
           onChange={(e) => setAnswer(e.target.value)} 
           required 
         />
-      </div><br/>
+      </div>
+      <div className="form-group">
+        <label htmlFor="grade" className="form-label">Grade:</label>
+        <input 
+          type="text" 
+          value={grade} 
+          className="form-control"
+          onChange={(e) => setGrade(e.target.value)} 
+          required 
+        />
+      </div>
+      <br/>
       <button type="submit" className='btn' id='add-btn'>Update Question</button>
       <button type="button" onClick={clearEdit} className="btn btn-secondary mx-2">Cancel</button>
     </form>

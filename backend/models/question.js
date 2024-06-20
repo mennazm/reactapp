@@ -9,6 +9,10 @@ const questionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  grade:{
+    type:Number,
+    required:true
+  }
 });
 
 module.exports = mongoose.model("Question", questionSchema); //

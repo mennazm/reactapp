@@ -75,6 +75,7 @@ const QuestionsComp = () => {
                 <th>#</th>
                 <th>Question</th>
                 <th>Answer</th>
+                <th>Grade</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -85,6 +86,7 @@ const QuestionsComp = () => {
                     <td>{index + 1}</td>
                     <td>{question.question}</td>
                     <td>{question.answer}</td>
+                    <td>{question.grade}</td>
                     <td>
                       <button onClick={() => { setEditQuestion(question); setShowUpdateForm(true); }} className="btn btn-outline-primary btn-sm me-2">
                         <BiPencil />

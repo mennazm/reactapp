@@ -7,10 +7,11 @@ const AddQuestionForm = ({ onSuccess }) => {
   const dispatch = useDispatch();
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const [grade, setGrade] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addNewQuestion({ question, answer }))
+    dispatch(addNewQuestion({ question, answer ,grade}))
       .then(() => {
         onSuccess();
       });
@@ -40,7 +41,19 @@ const AddQuestionForm = ({ onSuccess }) => {
           onChange={(e) => setAnswer(e.target.value)} 
           required 
         />
-      </div><br/>
+      </div>
+      <div className="form-group">
+        <label htmlFor="grade" className="form-label">Grade:</label>
+        <input 
+          type="text" 
+          className="form-control"
+          value={grade} 
+          onChange={(e) => setGrade(e.target.value)} 
+          required 
+        />
+      </div>
+      
+      <br/>
       <button className="btn" type="submit" id='add-btn'>Add Question</button>
       <button type="button" onClick={onSuccess} className="btn btn-secondary mx-2">Cancel</button>
     </form>
