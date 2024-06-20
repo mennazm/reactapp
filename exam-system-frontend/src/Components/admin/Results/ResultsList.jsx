@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BiDetail } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ResultsList = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
+    const fetchUserRole = () => {
+      const userRole = localStorage.getItem('userRole');
+      if (userRole !== 'admin') {
+        navigate('/login'); 
+      } else {
+        fetchResults();
+      }
+    };
+
     const fetchResults = async () => {
       const token = localStorage.getItem('token'); 
-      
+
       try {
         const response = await axios.get('http://localhost:8080/results', {
           headers: {
@@ -26,11 +35,8 @@ const ResultsList = () => {
       }
     };
 
-    fetchResults();
-  }, []);
-
-
-
+    fetchUserRole();
+  }, [navigate]); 
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -41,7 +47,7 @@ const ResultsList = () => {
 
   return (
     <div className="container m-auto mt-5 All_exams">
-      <h3 className="my-4">Student Results</h3>
+      <h3 className="my-4">students' results</h3>
       <table className="table table-striped">
         <thead>
           <tr>
