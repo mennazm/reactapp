@@ -56,7 +56,7 @@ const ExamsComp = () => {
   }
 
   if (status === 'failed') {
-    return <div>{error}</div>;
+    return <h3 className='alert alert-info container m-auto mt-5 w-75'>{error}</h3>;
   }
 
   return (

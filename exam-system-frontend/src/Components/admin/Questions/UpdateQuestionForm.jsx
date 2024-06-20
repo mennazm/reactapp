@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateQuestion } from '../../../store/questions/questionsSlice';
+import '../../../css/Questions/AddQuestionForm.css'
+
 
 const UpdateQuestionForm = ({ questionToEdit, onSuccess, clearEdit }) => {
   const dispatch = useDispatch();
@@ -16,29 +18,34 @@ const UpdateQuestionForm = ({ questionToEdit, onSuccess, clearEdit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Update Question</h2>
-      <div>
-        <label>Question:</label>
+    <div className="add-question-container">
+       <h3 className="add-question-title">Update Question</h3>
+       <hr className='custom-hr'/>
+    <form onSubmit={handleSubmit} className="add-question-form mt-5">
+    <div className="form-group">
+    <label htmlFor="question" className="form-label">Question:</label>
         <input 
           type="text" 
           value={question} 
+          className="form-control"
           onChange={(e) => setQuestion(e.target.value)} 
           required 
         />
       </div>
-      <div>
-        <label>Answer:</label>
+      <div className="form-group">
+        <label htmlFor="answer" className="form-label">Answer:</label>
         <input 
           type="text" 
           value={answer} 
+          className="form-control"
           onChange={(e) => setAnswer(e.target.value)} 
           required 
         />
-      </div>
-      <button type="submit">Update Question</button>
-      <button type="button" onClick={clearEdit}>Cancel</button>
+      </div><br/>
+      <button type="submit" className='btn' id='add-btn'>Update Question</button>
+      <button type="button" onClick={clearEdit} className="btn btn-secondary mx-2">Cancel</button>
     </form>
+    </div>
   );
 };
 
