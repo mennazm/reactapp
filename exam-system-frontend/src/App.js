@@ -10,23 +10,33 @@ import { fetchQuestions } from './store/questions/questionsSlice';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { fetchExams } from './store/exams/examSlice';
+import ExamsComp from './Components/admin/Exams/ExamsComp';
 
 
 function App() {
   const router= createBrowserRouter(
     createRoutesFromElements(
-
-      <Route path='/' element={<SharedLayout />}>
+      <>
       <Route path='login' element={<Login />} />
-
-      <Route
-        index
-        loader={fetchQuestions}
-        element={<QuestionsComp />}
-        errorElement={<ErrorComp />}
-      />
-      <Route path='*' element={<NotFoundedComp />} />
+      <Route path='/' element={<SharedLayout />}>
+          <Route
+            index
+            loader={fetchQuestions}
+            path='questions'
+            element={<QuestionsComp />}
+            errorElement={<ErrorComp />}
+          />
+          <Route
+            index
+            loader={fetchExams}
+            path='exams'
+            element={<ExamsComp />}
+            errorElement={<ErrorComp />}
+          />
+          <Route path='*' element={<NotFoundedComp />} />
     </Route>
+    </>
     )
   );
 

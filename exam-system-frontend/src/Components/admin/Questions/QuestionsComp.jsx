@@ -4,7 +4,7 @@ import { fetchQuestions, deleteQuestion, fetchQuestionById, clearSelectedQuestio
 import AddQuestionForm from './AddQuestionForm';
 import UpdateQuestionForm from './UpdateQuestionForm';
 import QuestionDetailsComp from './QuestionDetailsComp';
-import { BiPlusCircle, BiPencil, BiTrash, BiDetail } from 'react-icons/bi'; 
+import { BiPlusCircle, BiPencil, BiTrash, BiDetail } from 'react-icons/bi';
 import '../../../css/Questions/QuestionsComp.css';
 
 const QuestionsComp = () => {
@@ -61,7 +61,7 @@ const QuestionsComp = () => {
 
   return (
     <div className='m-auto mt-5 All_questions'>
-      {!selectedQuestion && (
+      {!showAddForm && !showUpdateForm && !selectedQuestion && (
         <>
           <div className="d-flex justify-content-between my-4">
             <div>
@@ -80,9 +80,9 @@ const QuestionsComp = () => {
             </thead>
             <tbody>
               {questions && questions.length > 0 ? (
-                questions.map((question,index) => (
+                questions.map((question, index) => (
                   <tr key={question._id}>
-                    <td>{index}</td>
+                    <td>{index + 1}</td>
                     <td>{question.question}</td>
                     <td>{question.answer}</td>
                     <td>
@@ -105,19 +105,19 @@ const QuestionsComp = () => {
               )}
             </tbody>
           </table>
-
-          {showAddForm && (
-            <AddQuestionForm onSuccess={handleAddSuccess} />
-          )}
-
-          {showUpdateForm && editQuestion && (
-            <UpdateQuestionForm
-              questionToEdit={editQuestion}
-              onSuccess={handleUpdateSuccess}
-              clearEdit={clearEdit}
-            />
-          )}
         </>
+      )}
+
+      {showAddForm && (
+        <AddQuestionForm onSuccess={handleAddSuccess} />
+      )}
+
+      {showUpdateForm && editQuestion && (
+        <UpdateQuestionForm
+          questionToEdit={editQuestion}
+          onSuccess={handleUpdateSuccess}
+          clearEdit={clearEdit}
+        />
       )}
 
       {selectedQuestion && (
