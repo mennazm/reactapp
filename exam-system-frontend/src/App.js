@@ -23,9 +23,9 @@ function App() {
     createRoutesFromElements(
       <>
       <Route path='register' element={<Register />} />
-      <Route path='login' element={<Login />} />
-      <Route path='/' element={<SharedLayout />}>
-      <Route path='admin/results' element={<ResultsList/>} />
+      <Route path='/' element={<Login />} />
+      <Route path='/admin' element={<SharedLayout />}>
+      <Route path='/admin/results' element={<ResultsList/>} />
       
       
           <Route

@@ -20,7 +20,7 @@ const Login = () => {
       console.log(token); 
 
       if(role==="admin"){
-        navigate('/questions');
+        navigate('admin/questions');
 
       }
       else{
