@@ -46,11 +46,12 @@ function App() {
             errorElement={<ErrorComp />}
           />
 
+    <Route path='user/results' element={<StudentResults/>} />
 
   <Route path="student">
   <Route path="exams/:examId" element={<TakeExam />} />
   <Route path="exams" element={<ExamList />} />
-  <Route path="results" element={<Results />} />
+
  
 </Route>
 

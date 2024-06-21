@@ -12,7 +12,7 @@ const StudentResults = () => {
       const token = localStorage.getItem('token'); 
       const userId = localStorage.getItem('userId');
       try {
-        const response = await axios.get(`http://localhost:8080/results/user/${userId}`, {
+        const response = await axios.get(`http://localhost:8081/results/user/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`, 
           }
