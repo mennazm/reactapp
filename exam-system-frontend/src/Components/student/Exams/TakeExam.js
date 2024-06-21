@@ -322,7 +322,7 @@
 // };
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../../../Api/ExamApi';
 import { MdTimer } from 'react-icons/md';
 import '../../../styles/TakeExam.css'
@@ -339,10 +339,21 @@ export const TakeExam = () => {
   const [submitted, setSubmitted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(1800);
   const [timerActive, setTimerActive] = useState(false);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const token = localStorage.getItem('token'); 
     const userId = localStorage.getItem('userId');
+
+    const fetchUserRole = () => {
+      const userRole = localStorage.getItem('userRole');
+      if (userRole !== 'user') {
+        navigate('/login'); 
+      } else {
+        fetchExam();
+      }
+    };
+
     const fetchExam = async () => {
       try {
         const response = await axiosInstance.get(`/exams/${examId}`);
@@ -356,9 +367,10 @@ export const TakeExam = () => {
       }
     };
 
-    fetchExam();
-  }, [examId]);
+    fetchUserRole();
+  }, [navigate, examId]);
 
+  
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
     if (storedUserId) {

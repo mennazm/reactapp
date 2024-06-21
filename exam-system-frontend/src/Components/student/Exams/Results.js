@@ -15,7 +15,7 @@ const Results = () => {
     const fetchUserRole = () => {
       const userRole = localStorage.getItem('userRole');
       if (userRole !== 'user') {
-        navigate('/'); 
+        navigate('/login'); 
       } else {
         fetchResults();
       }

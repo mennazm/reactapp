@@ -6,6 +6,7 @@ import UpdateExamsForm from './UpdateExamsForm';
 import ExamsDetailsComp from './ExamsDetailsComp';
 import { BiPlusCircle, BiPencil, BiTrash, BiDetail } from 'react-icons/bi';
 import '../../../css/Exams/ExamsComp.css';
+import { useNavigate } from 'react-router-dom';
 
 const ExamsComp = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,20 @@ const ExamsComp = () => {
   const [editExam, setEditExam] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const navigate = useNavigate(); 
 
+  const fetchUserRole = () => {
+    const userRole = localStorage.getItem('userRole');
+    if (userRole !== 'admin') {
+      navigate('/login'); 
+    } else {
+      fetchExams(); 
+    }
+  };
+
+  useEffect(() => {
+    fetchUserRole(); 
+  }, [navigate]);
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchExams());

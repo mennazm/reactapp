@@ -1,0 +1,61 @@
+.welcome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .welcome-container {
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .welcome-text {
+    margin-top:60px;
+  }
+  .welcome-container h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .welcome-container p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .admin-button,
+  .user-button {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+  
+  .admin-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .user-button {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .illustration {
+    margin-top: 20px;
+  }
+  
+  .illustration img {
+    width: 100%;
+    max-width: 600px;
+  }
+  

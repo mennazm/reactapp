@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { BiTrash } from 'react-icons/bi';
 
 const ResultsList = () => {
   const [results, setResults] = useState([]);
@@ -12,7 +13,7 @@ const ResultsList = () => {
     const fetchUserRole = () => {
       const userRole = localStorage.getItem('userRole');
       if (userRole !== 'admin') {
-        navigate('/'); 
+        navigate('/login'); 
       } else {
         fetchResults();
       }
@@ -37,6 +38,23 @@ const ResultsList = () => {
 
     fetchUserRole();
   }, [navigate]); 
+
+  const deleteResult = async (id) => {
+    const token = localStorage.getItem('token');
+
+    try {
+      await axios.delete(`http://localhost:8081/results/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Remove the deleted result from the state
+      setResults(results.filter((result) => result._id !== id));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -48,6 +66,11 @@ const ResultsList = () => {
   return (
     <div className="m-auto mt-5 All_exams">
       <h3 className="my-4">students' results</h3>
+      {results.length === 0 ? (
+        <div className="alert alert-info" role="alert">
+          No results to show.
+        </div>
+      ) : (
       <table className="table table-striped">
         <thead>
           <tr>
@@ -56,6 +79,7 @@ const ResultsList = () => {
             <th>Exam</th>
             <th>Score</th>
             <th>Date</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -66,10 +90,19 @@ const ResultsList = () => {
               <td>{result.exam ? result.exam.name : 'N/A'}</td>
               <td>{result.score}</td>
               <td>{new Date(result.createdAt).toLocaleString()}</td>
+              <td>
+                <button
+                  onClick={() => deleteResult(result._id)}
+                  className="btn btn-outline-danger btn-sm me-2"
+                >
+                  <BiTrash />
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+      )}
     </div>
   );
 };

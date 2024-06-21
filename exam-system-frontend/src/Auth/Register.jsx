@@ -1,6 +1,7 @@
 // src/Auth/Register.js
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -94,6 +95,9 @@ const Register = () => {
       <button type="submit" className="btn btn-primary">Register</button>
     </form>
     {message && <div className="mt-3 alert alert-info">{message}</div>}
+    <p className="mt-3" style={{marginLeft:170, color: '#555'}}>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
   </div>
   <div className="login-illustration">
       <img src="images/login.svg" alt="Login Illustration" />

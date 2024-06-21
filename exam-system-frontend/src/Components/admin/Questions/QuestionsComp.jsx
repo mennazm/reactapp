@@ -6,6 +6,7 @@ import UpdateQuestionForm from './UpdateQuestionForm';
 import QuestionDetailsComp from './QuestionDetailsComp';
 import { BiPlusCircle, BiPencil, BiTrash, BiDetail } from 'react-icons/bi';
 import '../../../css/Questions/QuestionsComp.css';
+import { useNavigate } from 'react-router-dom';
 
 const QuestionsComp = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,20 @@ const QuestionsComp = () => {
   const [editQuestion, setEditQuestion] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const navigate = useNavigate(); 
+
+  const fetchUserRole = () => {
+    const userRole = localStorage.getItem('userRole');
+    if (userRole !== 'admin') {
+      navigate('/login'); 
+    } else {
+      fetchQuestions(); 
+    }
+  };
+
+  useEffect(() => {
+    fetchUserRole(); 
+  }, [navigate]);
 
   useEffect(() => {
     if (status === 'idle') {

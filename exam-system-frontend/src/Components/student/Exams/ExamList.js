@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../../Api/ExamApi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../../styles/ExamList.css';
 import { BiHighlight } from 'react-icons/bi';
 
@@ -8,9 +8,18 @@ export function ExamList() {
   const [exams, setExams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
-    
+    const fetchUserRole = () => {
+      const userRole = localStorage.getItem('userRole');
+      if (userRole !== 'user') {
+        navigate('/login'); 
+      } else {
+        fetchExams();
+      }
+    };
+
     const fetchExams = async () => {
       try {
         const response = await axiosInstance.get('/exams');
@@ -28,8 +37,8 @@ export function ExamList() {
       }
     };
 
-    fetchExams();
-  }, []);
+    fetchUserRole();
+  },[navigate]);
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;

@@ -26,7 +26,9 @@ export function SharedLayout() {
               <Link to="/admin/results" className="list-group-item list-group-item-action bg-transparent text-white">
                 <BiCheckDouble className="me-1" style={{ fontSize: '1.5rem' }} />  Results
               </Link>
-              <Logout  />
+              <div style={{ cursor: 'pointer' }}>
+                <Logout />
+              </div>
         
           </div>
         </div>

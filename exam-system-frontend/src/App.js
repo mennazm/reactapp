@@ -18,6 +18,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import StudentResults from './Components/student/Exams/Results';
 import SharedStudentComp from './Components/student/SharedStudentComp';
 import Results from './Components/student/Exams/Results';
+import Welcome from './Components/Welcome';
 
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
     createRoutesFromElements(
       <>
         <Route path='register' element={<Register />} />
-        <Route path='/' element={<Login />} />
+        <Route path='login' element={<Login />} />
+        <Route path='/' element={<Welcome />} />
 
         {/* Admin Routes */}
         <Route path='/admin' element={<SharedLayout />}>
