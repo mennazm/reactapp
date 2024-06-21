@@ -14,7 +14,7 @@ import { TakeExam } from './Components/student/Exams/TakeExam';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import StudentResults from './Components/student/Exams/Results';
+import Results from './Components/student/Exams/Results';
 
 function App() {
   const router = createBrowserRouter(
@@ -45,7 +45,7 @@ function App() {
         <Route path='/student'>
           <Route path='exams' element={<ExamList />} />
           <Route path='exams/:examId' element={<TakeExam />} />
-          <Route path='results' element={<StudentResults/>} />
+          <Route path='results' element={<Results/>} />
         </Route>
         
         {/* Catch-all Route */}

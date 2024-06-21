@@ -1,13 +1,26 @@
 // src/components/StudentResults.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const StudentResults = () => {
+const Results = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate(); 
 
+
+  
   useEffect(() => {
+    const fetchUserRole = () => {
+      const userRole = localStorage.getItem('userRole');
+      if (userRole !== 'user') {
+        navigate('/'); 
+      } else {
+        fetchResults();
+      }
+    };
+
     const fetchResults = async () => {
       const token = localStorage.getItem('token'); 
       const userId = localStorage.getItem('userId');
@@ -25,8 +38,8 @@ const StudentResults = () => {
       }
     };
 
-    fetchResults();
-  }, []);
+    fetchUserRole();
+  }, [navigate]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -64,4 +77,4 @@ const StudentResults = () => {
   );
 };
 
-export default StudentResults;
+export default Results;
