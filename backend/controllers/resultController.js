@@ -36,7 +36,7 @@ exports.getResults = async (req, res) => {
 exports.getResult = async (req, res) => {
   try {
     const { id } = req.params;
-    const result = await result
+    const result = await Result
       .findById(id)
       .populate({
         path: "exam",
@@ -44,7 +44,6 @@ exports.getResult = async (req, res) => {
           path: "questions",
         },
       })
-      // exclude password when populating
       .populate({
         path: "user",
         select: "-password",

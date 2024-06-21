@@ -13,12 +13,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const userData = { email, password };
-      const { token, userId } = await loginUser(userData);
+      const { token, userId, role } = await loginUser(userData);
       localStorage.setItem('token', token);
-    
-
-
-      
+      localStorage.setItem('userId',userId)
+      localStorage.setItem('userRole', role);
       console.log(token); 
 
       if(role==="admin"){
@@ -26,12 +24,12 @@ const Login = () => {
 
       }
       else{
-        navigate('/exams');
+        navigate('/user/results');
 
       }
 
     } catch (error) {
-      setError(error.message);
+      setError(error);
     }
   };
 

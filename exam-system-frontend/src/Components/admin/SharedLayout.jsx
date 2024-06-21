@@ -1,7 +1,8 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import '../../css/Questions/SharedLayout.css';
-import { BiBook, BiClipboard } from 'react-icons/bi';
+import { BiBook, BiCheckDouble, BiClipboard } from 'react-icons/bi';
+import Logout from '../../Auth/logout';
 
 
 
@@ -22,6 +23,10 @@ export function SharedLayout() {
               <Link to="/exams" className="list-group-item list-group-item-action bg-transparent text-white">
                 <BiClipboard className="me-2" />  Exams
               </Link>
+              <Link to="/admin/results" className="list-group-item list-group-item-action bg-transparent text-white">
+                <BiCheckDouble className="me-1" style={{ fontSize: '1.5rem' }} />  Results
+              </Link>
+              <Logout  />
         
           </div>
         </div>
