@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../../Api/ExamApi'; 
 
-
 export function Results() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,7 +37,6 @@ export function Results() {
   }
 
   return (
-    <>
     <div className="results-container">
       <h1 className="text-center m-5">Exam Results</h1>
       <a href="/home" className="btn btn-primary fw-bold fs-5 mb-1">
@@ -65,6 +63,5 @@ export function Results() {
         </tbody>
       </table>
     </div>
-    </>
   );
 }
