@@ -16,7 +16,7 @@ export default function Welcome() {
       <div className="welcome-container">
         <div className="row">
             <div className="col-6 welcome-text">
-            <h1>Welcome to our platform!</h1>
+            <h1>Welcome to ExamMaster !</h1>
         <p>We are excited to have you here.</p>
         <button className="admin-button w-100" onClick={navigateToAdminLogin}>Login as Admin</button>
         <button className="user-button w-100" onClick={navigateTouserLogin}>Login as User</button>
