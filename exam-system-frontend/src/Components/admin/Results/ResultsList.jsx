@@ -12,7 +12,7 @@ const ResultsList = () => {
     const fetchUserRole = () => {
       const userRole = localStorage.getItem('userRole');
       if (userRole !== 'admin') {
-        navigate('/login'); 
+        navigate('/'); 
       } else {
         fetchResults();
       }
@@ -46,7 +46,7 @@ const ResultsList = () => {
   }
 
   return (
-    <div className="container m-auto mt-5 All_exams">
+    <div className="m-auto mt-5 All_exams">
       <h3 className="my-4">students' results</h3>
       <table className="table table-striped">
         <thead>

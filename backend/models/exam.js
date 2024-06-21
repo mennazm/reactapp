@@ -11,6 +11,11 @@ const examSchema = new mongoose.Schema({
       ref: "Question",
     },
   ],
+  status: {
+    type: String,
+    enum: ['available', 'unavailable'],
+    default: 'unavailable',
+  },
 });
 
 const Exam = mongoose.model("Exam", examSchema);
