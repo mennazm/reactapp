@@ -53,12 +53,12 @@ export const updateExam = createAsyncThunk('exams/updateExam', async (examData) 
 // Thunk for deleting an exam
 export const deleteExam = createAsyncThunk(
   'exams/deleteExam',
-  async (examId) => {
+  async (examId, thunkAPI) => {
     try {
-      const response = await axiosInstance.delete(`/exams/${examId}`);
-      return response.data; 
+      await axiosInstance.delete(`/exams/${examId}`);
+      return examId; 
     } catch (error) {
-      throw Error('Failed to delete exam');
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -133,22 +133,23 @@ const examsSlice = createSlice({
         state.error = action.error.message;
       })
 
+      
       // Handle delete exam actions
       .addCase(deleteExam.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(deleteExam.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        // Remove the deleted exam from the state
-        state.exams = state.exams.filter((exam) => exam._id !== action.payload); // Assuming payload is the deleted exam ID
-        state.selectedExamId = null; // Clear selected exam if deleted
+        state.exams = state.exams.filter((exam) => exam._id !== action.payload); 
+        state.selectedExamId = null; 
       })
       .addCase(deleteExam.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload ? action.payload : 'Failed to delete exam';
       });
+
   },
 });
 
 export default examsSlice.reducer;
-export const { clearSelectedExam ,setSelectedExamId} = examsSlice.actions;
+export const { clearSelectedExam ,selectedExamId} = examsSlice.actions;
