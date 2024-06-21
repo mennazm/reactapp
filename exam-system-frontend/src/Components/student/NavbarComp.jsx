@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../css/SharedStudentComp.css'
 import { Link } from 'react-router-dom'
+import Logout from '../../Auth/logout'
 
 export default function NavbarComp() {
   return (
@@ -21,9 +22,11 @@ export default function NavbarComp() {
           Results
           </Link>
           </li>
-          
         </ul>
       </div>
+      <div className="nav-item" style={{ cursor: 'pointer', marginRight:100 }}>
+            <Logout />
+          </div>
     </nav>
   )
 }
