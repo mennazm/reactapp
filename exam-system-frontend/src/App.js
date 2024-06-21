@@ -1,36 +1,31 @@
 import './styles/App.css';
 import Login from './Auth/Login';
+import Register from './Auth/Register';
 import QuestionsComp from './Components/admin/Questions/QuestionsComp';
 import { NotFoundedComp } from './Components/NotFoundedComp';
 import { ErrorComp } from './Components/ErrorComp';
 import { SharedLayout } from './Components/admin/SharedLayout';
+import ExamsComp from './Components/admin/Exams/ExamsComp';
+import ResultsList from './Components/admin/Results/ResultsList';
+import StudentResults from './Components/user/StudentResults';
 import { fetchQuestions } from './store/questions/questionsSlice';
+import { fetchExams } from './store/exams/examSlice';
+import { ExamList } from './Components/student/Exams/ExamList';
+import { TakeExam } from './Components/student/Exams/TakeExam';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { fetchExams } from './store/exams/examSlice';
-import ExamsComp from './Components/admin/Exams/ExamsComp';
-import {ExamList}from './Components/student/Exams/ExamList';
-
-import {TakeExam} from './Components/student/Exams/TakeExam';
-import {Results }from './Components/student/Exams/Results';
-import Register from './Auth/Register';
-import ResultsList from './Components/admin/Results/ResultsList';
-import StudentResults from './Components/user/StudentResults';
-
-
-
 
 function App() {
-  const router= createBrowserRouter(
+  const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-      <Route path='register' element={<Register />} />
-      <Route path='/' element={<Login />} />
-      <Route path='/admin' element={<SharedLayout />}>
-      <Route path='/admin/results' element={<ResultsList/>} />
-      
-      
+        <Route path='register' element={<Register />} />
+        <Route path='/' element={<Login />} />
+
+        {/* Admin Routes */}
+        <Route path='/admin' element={<SharedLayout />}>
+          <Route path='results' element={<ResultsList />} />
           <Route
             index
             loader={fetchQuestions}
@@ -39,36 +34,32 @@ function App() {
             errorElement={<ErrorComp />}
           />
           <Route
-            index
             loader={fetchExams}
             path='exams'
             element={<ExamsComp />}
             errorElement={<ErrorComp />}
           />
+        </Route>
 
-    <Route path='user/results' element={<StudentResults/>} />
-
-  <Route path="student">
-  <Route path="exams/:examId" element={<TakeExam />} />
-  <Route path="exams" element={<ExamList />} />
-
- 
-</Route>
-
-
-          
-<Route path='*' element={<NotFoundedComp />} />
-    </Route>
-    <Route path='user/results' element={<StudentResults/>} />
-    </>
+        {/* Student Routes */}
+        <Route path='/student'>
+          <Route path='exams/:examId' element={<TakeExam />} />
+          <Route path='exams' element={<ExamList />} />
+        </Route>
+        
+        {/* User Results Route */}
+        <Route path='user/results' element={<StudentResults />} />
+        
+        {/* Catch-all Route */}
+        <Route path='*' element={<NotFoundedComp />} />
+      </>
     )
   );
 
   return (
     <>
-
-    <RouterProvider router={router}/>
-   </>
+      <RouterProvider router={router} />
+    </>
   );
 }
 
