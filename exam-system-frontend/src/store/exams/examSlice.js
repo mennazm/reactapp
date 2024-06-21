@@ -4,6 +4,7 @@ import axiosInstance from '../../Api/ExamApi';
 const initialState = {
   exams: [],
   selectedExam: null,
+  results: [],
   status: 'idle',
   error: null,
 };
@@ -64,6 +65,9 @@ const examsSlice = createSlice({
   reducers: {
     clearSelectedExam(state) {
       state.selectedExam = null;
+    },
+    addExamResult(state, action) {
+      state.results.push(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -139,4 +143,4 @@ const examsSlice = createSlice({
 });
 
 export default examsSlice.reducer;
-export const { clearSelectedExam } = examsSlice.actions;
+export const { clearSelectedExam, addExamResult } = examsSlice.actions;

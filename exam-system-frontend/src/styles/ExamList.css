@@ -1,0 +1,27 @@
+/* ExamList.css */
+
+.exam-list-container {
+    margin-top: 20px; /* Example margin */
+  }
+  
+  .exam-list-container .btn-primary {
+    margin-bottom: 10px; /* Example margin */
+  }
+  
+  .exam-list-title {
+    margin-top: 30px;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .exam-item {
+    background-color: #f8f9fa; /* Example background color */
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .exam-link {
+    text-decoration: none;
+    color: #00d5ff;
+  }
+  
