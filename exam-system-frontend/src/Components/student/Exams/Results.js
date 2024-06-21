@@ -1,70 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../../Api/ExamApi'; 
+// src/components/StudentResults.js
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-
-export function Results() {
+const StudentResults = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const userId = localStorage.getItem('id'); 
-    if (!userId) {
-      setError('User ID not found in local storage.');
-      setLoading(false);
-      return;
-    }
-
     const fetchResults = async () => {
+      const token = localStorage.getItem('token'); 
+      const userId = localStorage.getItem('userId');
       try {
-        const response = await axiosInstance.get(`/results/user/${userId}`);
+        const response = await axios.get(`http://localhost:8081/results/user/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, 
+          }
+        });
         setResults(response.data);
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching results:', err);
-        setError('Failed to fetch results. Please try again later.');
+        setError(err.response ? err.response.data.error : 'An error occurred');
         setLoading(false);
       }
     };
 
     fetchResults();
-  }, []); 
+  }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-
-  if (results.length === 0) {
-    return <div>No results found for this user.</div>;
-  }
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <>
-    <div className="results-container">
-      <h1 className="text-center m-5">Exam Results</h1>
-      <a href="/home" className="btn btn-primary fw-bold fs-5 mb-1">
-        <i className="fas fa-home"></i>
-      </a>
-      <table className="table table-hover table-striped">
-        <thead className="table-dark text-light text-center">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Exam Name</th>
-            <th scope="col">Score</th>
-            <th scope="col">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.map((result, index) => (
-            <tr key={result._id}>
-              <td>{index + 1}</td>
-              <td>{result.exam.name}</td>
-              <td>{result.score}</td>
-              <td>{new Date(result.createdAt).toLocaleDateString()}</td>
+    <div className="container m-auto mt-5 All_exams">
+      <h3 className="my-4">Student Results</h3>
+      {results.length === 0 ? (
+        <div className="alert alert-info" role="alert">
+          No results to show.
+        </div>
+      ) : (
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Exam</th>
+              <th>Score</th>
+              <th>Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {results.map((result, index) => (
+              <tr key={result._id}>
+                <td>{index + 1}</td>
+                <td>{result.exam ? result.exam.name : 'N/A'}</td>
+                <td>{result.score}</td>
+                <td>{new Date(result.createdAt).toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
-    </>
   );
-}
+};
+
+export default StudentResults;

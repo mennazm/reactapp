@@ -177,9 +177,15 @@ export const TakeExam = () => {
   const [totalQuestions, setTotalQuestions] = useState(0);
 
   useEffect(() => {
+    const token = localStorage.getItem('token'); 
+    const userId = localStorage.getItem('userId');
     const fetchExam = async () => {
       try {
-        const response = await axiosInstance.get(`/exams/${examId}`);
+        const response = await axiosInstance.get(`/exams/${examId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, 
+          }
+        });
         console.log(response);
         setExam(response.data);
         setTotalQuestions(response.data.questions.length);
@@ -196,7 +202,7 @@ export const TakeExam = () => {
   }, [examId]);
 
   useEffect(() => {
-    const storedUserId = localStorage.getItem('id');
+    const storedUserId = localStorage.getItem('userId');
     if (storedUserId) {
       setUserId(storedUserId);
     }
