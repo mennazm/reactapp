@@ -1,0 +1,31 @@
+nav, footer{
+    background-color: #093b56 ;
+}
+.navbar-brand {
+    color: white !important;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .nav-link {
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+.nav-link:hover, .nav-link:active, .nav-link:focus {
+    color: white !important;
+  }
+  .navbar-brand:hover, .navbar-brand:active, .navbar-brand:focus {
+    color: white !important;
+  }
+.navbar-brand{
+    font-family: "Playwrite AU SA", cursive;
+    font-weight: 400;
+    font-style: normal;
+    margin-left: 3rem;
+}
+.navbar-nav{
+    margin-left: 30%;
+}

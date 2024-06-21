@@ -15,6 +15,7 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import StudentResults from './Components/student/Exams/Results';
+import SharedStudentComp from './Components/student/SharedStudentComp';
 
 function App() {
   const router = createBrowserRouter(
@@ -42,7 +43,7 @@ function App() {
         </Route>
 
         {/* Student Routes */}
-        <Route path='/student'>
+        <Route path='/student' element={<SharedStudentComp/>}>
           <Route path='exams' element={<ExamList />} />
           <Route path='exams/:examId' element={<TakeExam />} />
           <Route path='results' element={<StudentResults/>} />

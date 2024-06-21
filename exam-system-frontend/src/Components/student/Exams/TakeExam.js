@@ -161,6 +161,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axiosInstance from '../../../Api/ExamApi';
+import { MdTimer } from 'react-icons/md';
+import '../../../styles/TakeExam.css'
 
 export const TakeExam = () => {
   const { examId } = useParams();
@@ -276,14 +278,20 @@ export const TakeExam = () => {
   if (!submitted) {
         return (
           <div className="container-fluid py-5">
-            <div className="container bg-white p-5">
+            <div className="container containerExam bg-white p-5">
               <div className="d-flex justify-content-between mb-4">
-                <h3>Exam: <span className="fw-bold">{exam.name}</span></h3>
-                <h3>Time Left: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? `0${timeLeft % 60}` : timeLeft % 60}</h3>
+              <h3> <span className="fw-bold " id='exam'>{exam.name} Exam</span></h3>
+                <div className='d-flex align-items-start'>
+                  <MdTimer size={35} color="#093b56" />
+                  <p className='lead mx-1'>{Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? `0${timeLeft % 60}` : timeLeft % 60} Min</p>
+                  <p className='mt-4 ' id='time-left'>Time Left</p>
+                </div>
               </div>
               <form onSubmit={handleSubmit} className="take-exam-form">
-                {exam.questions.map((question) => (
-                  <div key={question._id} className="question mb-5">
+                {exam.questions.map((question,index) => (
+                  <div key={question._id} className="question mb-5 w-75 m-auto p-4">
+                    <h5 className='text-center'>Question {index+1} </h5>
+                    <hr className='hr-custom '/><br/>
                     <h3 className="h3">{question.question}</h3>
                     <input
                       type="text"
@@ -296,7 +304,7 @@ export const TakeExam = () => {
                 ))}
                 <button
                   type="submit"
-                  className="btn fw-bold p-2 fs-5 mt-4"
+                  className="btn fs-5 "
                   style={{ backgroundColor: '#093b56', float: 'right', color: 'white' }}
                 >
                   <i className="fa-solid fa-circle-check"></i> Finish Exam
