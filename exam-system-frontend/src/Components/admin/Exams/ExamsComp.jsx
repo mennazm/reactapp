@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchExams, deleteExam, fetchExamById, clearSelectedExam } from '../../../store/exams/examSlice';
+import { fetchExams, deleteExam, fetchExamById, clearSelectedExam, updateExamStatusLocally, updateExamStatus } from '../../../store/exams/examSlice';
 import AddExamsForm from './AddExamsForm';
 import UpdateExamsForm from './UpdateExamsForm';
 import ExamsDetailsComp from './ExamsDetailsComp';
@@ -53,6 +53,14 @@ const ExamsComp = () => {
     dispatch(clearSelectedExam());
   };
 
+  const handleStatusChange = (examId, currentStatus) => {
+    const newStatus = currentStatus === 'available' ? 'unavailable' : 'available';
+    // Optimistic update
+    dispatch(updateExamStatusLocally({ id: examId, status: newStatus }));
+    // Dispatch the async thunk to update the status in the backend
+    dispatch(updateExamStatus({ id: examId, status: newStatus }));
+  };
+
   if (status === 'loading') {
     return <h3 className='alert alert-info container m-auto mt-5 w-75'>Loading...</h3>;
   }
@@ -77,6 +85,7 @@ const ExamsComp = () => {
                 <th>#</th>
                 <th>Exam Name</th>
                 <th>Questions</th>
+                <th>Avaliable</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -87,6 +96,13 @@ const ExamsComp = () => {
                     <td>{index + 1}</td>
                     <td>{exam.name}</td>
                     <td>{exam.questions.length}</td>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={exam.status === 'available'}
+                        onChange={() => handleStatusChange(exam._id, exam.status)}
+                      />
+                    </td>
                     <td>
                       <button onClick={() => { setEditExam(exam); setShowUpdateForm(true); }} className="btn btn-outline-primary btn-sm me-2">
                         <BiPencil />

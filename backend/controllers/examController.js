@@ -1,8 +1,8 @@
 const Exam = require("../models/exam");
 
 exports.createExam = async (req, res) => {
-  const { name, questions } = req.body;
-  const exam = new Exam({ name, questions });
+  const { name, questions,status } = req.body;
+  const exam = new Exam({ name, questions,status });
   const result = await exam.save();
   res.status(201).json(result);
 };
@@ -27,12 +27,12 @@ exports.getExam = async (req, res) => {
 };
 
 exports.updateExam = async (req, res) => {
-  const { name, questions } = req.body;
+  const { name, questions,status } = req.body;
   const { id } = req.params;
   try {
     const exam = await Exam.findByIdAndUpdate(
       id,
-      { name, questions },
+      { name, questions,status },
       { new: true }
     );
     res.status(204).json(exam);

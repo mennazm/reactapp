@@ -50,6 +50,11 @@ export const updateExam = createAsyncThunk('exams/updateExam', async (examData) 
   }
 });
 
+export const updateExamStatus = createAsyncThunk('exams/updateExamStatus', async ({ id, status }) => {
+  const response = await axiosInstance.put(`/exams/${id}`, { status });
+  return response.data;
+});
+
 // Thunk for deleting an exam
 export const deleteExam = createAsyncThunk(
   'exams/deleteExam',
@@ -73,6 +78,13 @@ const examsSlice = createSlice({
       state.selectedExam = null;
       state.selectedExamId = null;
       
+    },
+    updateExamStatusLocally: (state, action) => {
+      const { id, status } = action.payload;
+      const index = state.exams.findIndex(exam => exam._id === id);
+      if (index !== -1) {
+        state.exams[index].status = status;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -133,6 +145,12 @@ const examsSlice = createSlice({
         state.error = action.error.message;
       })
 
+      .addCase(updateExamStatus.fulfilled, (state, action) => {
+        const index = state.exams.findIndex(exam => exam._id === action.payload._id);
+        if (index !== -1) {
+          state.exams[index].status = action.payload.status;
+        }
+      })
       
       // Handle delete exam actions
       .addCase(deleteExam.pending, (state) => {
@@ -152,4 +170,4 @@ const examsSlice = createSlice({
 });
 
 export default examsSlice.reducer;
-export const { clearSelectedExam ,selectedExamId} = examsSlice.actions;
+export const { clearSelectedExam ,selectedExamId, updateExamStatusLocally} = examsSlice.actions;

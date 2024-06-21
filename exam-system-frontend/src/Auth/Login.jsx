@@ -24,7 +24,7 @@ const Login = () => {
 
       }
       else{
-        navigate('/user/results');
+        navigate('/student/exams');
 
       }
 

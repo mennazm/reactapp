@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../../Api/ExamApi';
 import { Link } from 'react-router-dom';
 import '../../../styles/ExamList.css';
+import { BiHighlight } from 'react-icons/bi';
 
 export function ExamList() {
   const [exams, setExams] = useState([]);
@@ -13,7 +14,11 @@ export function ExamList() {
       try {
         const response = await axiosInstance.get('/exams');
         console.log('Response:', response.data);
-        setExams(response.data);
+        
+        // Filter exams with status "available"
+        const availableExams = response.data.filter(exam => exam.status === 'available');
+        
+        setExams(availableExams);
         setLoading(false);
       } catch (err) {
         console.error('Error fetching exams:', err);
@@ -30,21 +35,27 @@ export function ExamList() {
 
   return (
     <div className="container exam-list-container">
-      <div className="d-flex justify-content-start">
-        
-        
-      </div>
-      <h1 className="exam-list-title text-center">All Available Exams</h1>
-      <div className="row">
-        {exams.map((exam) => (
-          <div key={exam._id} className="col-md-6 mb-4">
-            <div className="exam-item list-group-item">
-            <Link to={`${exam._id}`} className="exam-link">{exam.name}</Link>
-
-            </div>
-          </div>
-        ))}
-      </div>
+      <h3 className="exam-list-title my-4">All Available Exams</h3>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Exam Name</th>
+            <th scope="col">Take Exam</th>
+          </tr>
+        </thead>
+        <tbody>
+          {exams.map((exam) => (
+            <tr key={exam._id}>
+              <td>{exam.name}</td>
+              <td>
+                <Link to={`${exam._id}`}>
+                <BiHighlight className="me-1" style={{ fontSize: '1.5rem' }} />
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

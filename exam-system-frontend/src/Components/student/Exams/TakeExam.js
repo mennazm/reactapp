@@ -339,6 +339,8 @@ export const TakeExam = () => {
   const [timerActive, setTimerActive] = useState(false);
 
   useEffect(() => {
+    const token = localStorage.getItem('token'); 
+    const userId = localStorage.getItem('userId');
     const fetchExam = async () => {
       try {
         const response = await axiosInstance.get(`/exams/${examId}`);
