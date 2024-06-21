@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const questionController = require("../controllers/questionController");
+const {isAdmin,isUser} = require("../middlewares/auth/authRules");
+
 
 /**
  * @openapi
@@ -35,7 +37,6 @@ const questionController = require("../controllers/questionController");
  *       500:
  *         description: Server error
  */
-router.post("/", questionController.createQuestion);
 
 /**
  * @openapi
@@ -55,7 +56,6 @@ router.post("/", questionController.createQuestion);
  *       500:
  *         description: Server error
  */
-router.get("/", questionController.getAllQuestions);
 
 /**
  * @openapi
@@ -80,7 +80,6 @@ router.get("/", questionController.getAllQuestions);
  *       404:
  *         description: Question not found
  */
-router.get("/:id", questionController.getQuestionById);
 
 /**
  * @openapi
@@ -118,7 +117,6 @@ router.get("/:id", questionController.getQuestionById);
  *       500:
  *         description: Server error
  */
-router.put("/:id", questionController.updateQuestion);
 
 /**
  * @openapi
@@ -139,7 +137,6 @@ router.put("/:id", questionController.updateQuestion);
  *       500:
  *         description: Server error
  */
-router.delete("/:id", questionController.deleteQuestion);
 
 /**
  * @openapi
@@ -152,8 +149,14 @@ router.delete("/:id", questionController.deleteQuestion);
  *           type: string
  *         answer:
  *           type: string
- *          grade:
+ *         grade:
  *           type: number
  */
+
+router.post("/", isAdmin, questionController.createQuestion);
+router.get("/", isAdmin, questionController.getAllQuestions);
+router.get("/:id", isAdmin, questionController.getQuestionById);
+router.put("/:id", isAdmin, questionController.updateQuestion);
+router.delete("/:id", isAdmin, questionController.deleteQuestion);
 
 module.exports = router;

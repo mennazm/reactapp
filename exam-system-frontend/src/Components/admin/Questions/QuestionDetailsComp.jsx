@@ -34,8 +34,9 @@ const QuestionDetailsComp = ({ questionId, onBack }) => {
   return (
     <div className="question-details-container">
       <h3 className="question-details-title">Question Details</h3>
+      <hr className='custom-hr'/>
       {question ? (
-        <div className="question-details-content">
+        <div className="question-details-content mt-5">
           <div className="chat-item">
             <div className="question"><strong>Question:</strong> {question.question}</div>
           </div>
@@ -43,8 +44,8 @@ const QuestionDetailsComp = ({ questionId, onBack }) => {
             <div className="answer"><strong>Answer:</strong> {question.answer}</div>
           </div>
           <div className="chat-item">
-            <div className="grade"><strong>Grade:</strong> {question.grade}</div>
-          </div>
+            <div className="question"><strong>Grade:</strong> {question.grade}</div>
+          </div><br/>
           <IoIosArrowDropleftCircle className="back-icon" onClick={onBack} />  
             </div>
       ) : (

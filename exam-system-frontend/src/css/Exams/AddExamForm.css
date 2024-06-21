@@ -1,0 +1,97 @@
+/* AddExamForm.css */
+
+.add-exam-form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #093B56;
+  }
+  .custom-hr {
+    border: none;
+    border-top: 2px solid #093B56; 
+    width: 39%; 
+    margin: -13px auto; 
+    
+  }
+  .add-exam-form h3 {
+    font-size: 24px;
+    color: #093b56;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .question-label {
+    display: flex;
+    align-items: center;
+  }
+  
+ 
+  .question-details {
+    background-color: #f0f0f0;
+    padding: 9px;
+    border-radius: 4px;
+  
+    height: 15vh;
+    width: 20vw;
+   
+    
+  }
+  .question-text {
+    margin-top: 2.2rem;
+  }
+  .all-ques:hover{
+  background-color: #f0f0f0;
+  }
+  .question-grade {
+    color: #777;
+  }
+  
+  .btn-primary {
+    background-color: #093b56;
+    color: white;
+    border: none;
+    padding: 7px 17px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #052d42;
+  }
+  
+  .btn-secondary {
+    color: white;
+    border: none;
+    padding: 7px 17px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #999;
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchExams, deleteExam, fetchExamById, clearSelectedExam } from '../../../store/exams/examSlice';
+import { fetchExams, deleteExamAndQuestions, fetchExamById, clearSelectedExam } from '../../../store/exams/examSlice';
 import AddExamsForm from './AddExamsForm';
 import UpdateExamsForm from './UpdateExamsForm';
 import ExamsDetailsComp from './ExamsDetailsComp';
@@ -25,7 +25,15 @@ const ExamsComp = () => {
   }, [status, dispatch]);
 
   const handleDeleteExam = (id) => {
-    dispatch(deleteExam(id));
+    dispatch(deleteExamAndQuestions(id))
+    .unwrap()
+    .then(() => {
+      dispatch(fetchExams()); 
+    })
+    .catch((error) => {
+      console.error('Failed to delete exam:', error);
+      
+    });
   };
 
   const clearEdit = () => {

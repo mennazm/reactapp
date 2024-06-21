@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchExamById, clearSelectedExam } from '../../../store/exams/examSlice';
 import { fetchQuestions } from '../../../store/questions/questionsSlice';
+import { IoIosArrowDropleftCircle } from "react-icons/io";
 import '../../../css/Exams/ExamDetailsComp.css';
 
 const ExamDetailsComp = ({ examId, onBack }) => {
@@ -14,7 +15,7 @@ const ExamDetailsComp = ({ examId, onBack }) => {
   useEffect(() => {
     if (examId) {
       dispatch(fetchExamById(examId));
-      dispatch(fetchQuestions()); // Fetch all questions to map with exam question IDs
+      dispatch(fetchQuestions()); 
     }
 
     return () => {
@@ -32,24 +33,28 @@ const ExamDetailsComp = ({ examId, onBack }) => {
 
   const getQuestionDetails = (questionId) => {
     const question = questions.find((q) => q._id === questionId);
-    return question ? `${question.question} - ${question.answer}` : 'Question not found';
+    return question ? `${question.question} - ${question.answer} -  ${question.grade} ` : 'Question not found';
   };
 
   return (
-    <div className="exam-details-container">
-      <h3 className="exam-details-title">Exam Details</h3>
+    <div className="exam-details-container mb-5">
+      <h3 className="exam-details-title text-center"> {exam.name} Exam Details</h3>
+      <hr className='custom-hr'/> <br/>
       {exam ? (
         <div className="exam-details-content">
-          <p><strong>Name:</strong> {exam.name}</p>
           <p><strong>Questions:</strong></p>
-          <ul>
-            {exam.questions.map((question, index) => (
-              <li key={question._id}>
-                {`${question.question} - ${question.answer}`}
+          <ol>
+            {exam.questions.map((question) => (
+              <li key={question._id} className="question-item">
+                <span className="question-text"> {question.question}</span>
+                  <div className="question-details">
+                    <p><strong>Answer:</strong> {question.answer}</p>
+                    <p><strong>Grade:</strong> {question.grade}</p>
+                  </div>
               </li>
             ))}
-          </ul>
-          <button onClick={onBack} className="exam-details-button">Back to Exams</button>
+          </ol>
+          <IoIosArrowDropleftCircle className="back-icon" onClick={onBack} />  
         </div>
       ) : (
         <div className='h3 alert alert-danger'>No exam details available</div>

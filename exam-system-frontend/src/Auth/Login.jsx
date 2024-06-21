@@ -18,7 +18,15 @@ const Login = () => {
       localStorage.setItem('userId',userId)
       localStorage.setItem('userRole', role);
       console.log(token); 
-      navigate('/questions');
+
+      if(role==="admin"){
+        navigate('/questions');
+
+      }
+      else{
+        navigate('/user/results');
+
+      }
 
     } catch (error) {
       setError(error);
