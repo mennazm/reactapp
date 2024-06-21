@@ -64,14 +64,7 @@ const questionsSlice = createSlice({
   name: 'questions',
   initialState,
   reducers: {
-    removeQuestionFromExam(state, action) {
-      const { examId, questionId } = action.payload;
-      // Find the exam by examId and remove questionId from its questions array
-      const exam = state.questions.find((exam) => exam._id === examId);
-      if (exam) {
-        exam.questions = exam.questions.filter((qid) => qid !== questionId);
-      }
-    },
+
     clearSelectedQuestion(state) {
         state.selectedQuestion = null;
       },
@@ -135,7 +128,7 @@ const questionsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       });
-      
+
       builder
       .addCase(fetchQuestionById.pending, (state) => {
         state.status = 'loading';

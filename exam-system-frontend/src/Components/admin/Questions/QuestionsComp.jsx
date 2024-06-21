@@ -26,6 +26,8 @@ const QuestionsComp = () => {
 
   const handleDeleteQuestion = (id) => {
     dispatch(deleteQuestion(id));
+    dispatch(fetchQuestions());
+
   };
 
   const clearEdit = () => {

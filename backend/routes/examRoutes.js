@@ -101,36 +101,6 @@ router.put("/:id", examController.updateExam);
 /**
  * @openapi
  * /exams/{examId}/questions/{questionId}:
- *   delete:
- *     tags: [Exam]
- *     summary: Remove a question from an exam
- *     parameters:
- *       - in: path
- *         name: examId
- *         schema:
- *           type: string
- *         required: true
- *         description: ID of the exam
- *       - in: path
- *         name: questionId
- *         schema:
- *           type: string
- *         required: true
- *         description: ID of the question
- *     responses:
- *       200:
- *         description: Question removed successfully
- *       500:
- *         description: Server error
- */
-router.delete(
-  "/:examId/questions/:questionId",
-  examController.removeQuestionFromExam
-);
-
-/**
- * @openapi
- * /exams/{examId}/questions/{questionId}:
  *   post:
  *     tags: [Exam]
  *     summary: Add a question to an exam
@@ -154,5 +124,29 @@ router.delete(
  *         description: Server error
  */
 router.post("/:examId/questions/:questionId", examController.addQuestionToExam);
+
+
+/**
+ * @openapi
+ * /exams/{id}:
+ *   delete:
+ *     tags: [Exam]
+ *     summary: Delete an exam by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the exam to delete
+ *     responses:
+ *       200:
+ *         description: Exam deleted successfully
+ *       404:
+ *         description: Exam not found
+ *       500:
+ *         description: Server error
+ */
+router.delete("/:id", examController.removeExam);
 
 module.exports = router;
