@@ -17,10 +17,10 @@ export function SharedLayout() {
           </div>
           <div className="list-group list-group-flush">
         
-              <Link to="/questions" className="list-group-item list-group-item-action bg-transparent text-white">
+              <Link to="/admin/questions" className="list-group-item list-group-item-action bg-transparent text-white">
                 <BiBook className="me-2" /> Questions
               </Link>
-              <Link to="/exams" className="list-group-item list-group-item-action bg-transparent text-white">
+              <Link to="/admin/exams" className="list-group-item list-group-item-action bg-transparent text-white">
                 <BiClipboard className="me-2" />  Exams
               </Link>
               <Link to="/admin/results" className="list-group-item list-group-item-action bg-transparent text-white">

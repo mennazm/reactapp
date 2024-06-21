@@ -41,19 +41,14 @@ exports.updateExam = async (req, res) => {
   }
 };
 
-/// remove question from exam
-exports.removeQuestionFromExam = async (req, res) => {
-  const { examId, questionId } = req.params;
+exports.removeExam = async (req, res) => {
+  const { id } = req.params;
   try {
-    const exam = await Exam.findByIdAndUpdate(
-      examId,
-      { $pull: { questions: questionId } },
-      { new: true }
-    );
+    const exam = await Exam.findByIdAndDelete(id);
     if (!exam) {
       return res.status(404).json({ error: "Exam not found" });
     }
-    res.status(200).json(exam);
+    res.status(200).json({ message: "Exam deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -77,3 +72,7 @@ exports.addQuestionToExam = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+
+
