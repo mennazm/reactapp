@@ -15,11 +15,23 @@ const Login = () => {
       const userData = { email, password };
       const { token, userId } = await loginUser(userData);
       localStorage.setItem('token', token);
+    
+
+
+      
       console.log(token); 
-      navigate('/questions');
+
+      if(role==="admin"){
+        navigate('/questions');
+
+      }
+      else{
+        navigate('/exams');
+
+      }
 
     } catch (error) {
-      setError(error);
+      setError(error.message);
     }
   };
 

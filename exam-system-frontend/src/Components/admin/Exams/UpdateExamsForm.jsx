@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateExam } from '../../../store/exams/examSlice';
 import { fetchQuestions } from '../../../store/questions/questionsSlice';
+import '../../../css/Exams/AddExamForm.css'
+
 
 const UpdateExamForm = ({ examToEdit, onSuccess, clearEdit }) => {
   const dispatch = useDispatch();
@@ -12,7 +14,7 @@ const UpdateExamForm = ({ examToEdit, onSuccess, clearEdit }) => {
 
   useEffect(() => {
     dispatch(fetchQuestions());
-    setSelectedQuestions(examToEdit.questions.map(q => q._id)); // Initialize selected questions with current exam's question IDs
+    setSelectedQuestions(examToEdit.questions.map(q => q._id)); 
   }, [dispatch, examToEdit.questions]);
 
   const handleQuestionChange = (questionId) => {
@@ -33,32 +35,44 @@ const UpdateExamForm = ({ examToEdit, onSuccess, clearEdit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Update Exam</h2>
-      <div>
-        <label>Name:</label>
+    <form onSubmit={handleSubmit}  className="add-exam-form mb-5">
+      <h3>Update Exam</h3>
+      <hr className='custom-hr'/> <br/>
+      <div className="form-group">
+      <label htmlFor="examName">Name:</label>
         <input 
           type="text" 
           value={name} 
+          className="form-control"
+           id="examName"
           onChange={(e) => setName(e.target.value)} 
           required 
         />
       </div>
-      <div>
+      <div className="form-group">
         <label>Questions:</label>
         {allQuestions && allQuestions.length > 0 ? (
-          allQuestions.map((question) => {
+          allQuestions.map((question,index) => {
             const isChecked = selectedQuestions.includes(question._id);
             return (
-              <div key={question._id}>
-                <label>
+              <div key={question._id} className="question-item">
+                <label className="question-label">
                   <input
                     type="checkbox"
                     value={question._id}
                     checked={isChecked}
+                    className="form-check-input"
                     onChange={() => handleQuestionChange(question._id)}
                   />
-                  {question.question} - {question.answer}
+                  <div className="d-flex justify-content-between w-100 my-4 all-ques mx-2">
+                  <span className="question-text px-2">
+                    {index + 1} - {question.question}
+                  </span>
+                  <div className="question-details">
+                    <p>Answer: {question.answer}</p>
+                    <p>Grade: {question.grade}</p>
+                  </div>
+                </div>
                 </label>
               </div>
             );
@@ -67,8 +81,8 @@ const UpdateExamForm = ({ examToEdit, onSuccess, clearEdit }) => {
           <p>No questions available</p>
         )}
       </div>
-      <button type="submit">Update Exam</button>
-      <button type="button" onClick={clearEdit}>Cancel</button>
+      <button type="submit" className="btn btn-primary">Update Exam</button>
+      <button type="button" onClick={clearEdit}  className="btn btn-secondary mx-2">Cancel</button>
     </form>
   );
 };

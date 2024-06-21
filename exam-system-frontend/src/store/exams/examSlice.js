@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { removeQuestionFromExam } from '../questions/questionsSlice';
+
 import axiosInstance from '../../Api/ExamApi';
 
 const initialState = {
@@ -48,15 +50,28 @@ export const updateExam = createAsyncThunk('exams/updateExam', async (examData) 
   }
 });
 
-// Thunk for deleting an exam
-export const deleteExam = createAsyncThunk('exams/deleteExam', async (examId) => {
-  try {
-    await axiosInstance.delete(`/exams/${examId}`);
-    return examId;
-  } catch (error) {
-    throw Error('Failed to delete exam');
+// Thunk for deleting an exam and its associated questions
+export const deleteExamAndQuestions = createAsyncThunk(
+  'exams/deleteExamAndQuestions',
+  async ({ examId, questionId }, { dispatch, rejectWithValue }) => {
+    try {
+      // Step 1: Delete the question from the exam
+      await axiosInstance.delete(`/exams/${examId}/questions/${questionId}`);
+
+      // Step 2: Call the action from questionsSlice to remove the question from the Redux store
+      dispatch(removeQuestionFromExam({ examId, questionId }));
+
+      // Step 3: Optionally, delete the exam itself (if required)
+      // await axiosInstance.delete(`/exams/${examId}`);
+
+      return examId; // Return examId on success
+    } catch (error) {
+      // Handle errors and reject with an error message
+      return rejectWithValue('Failed to delete question from exam');
+    }
   }
-});
+);
+
 
 const examsSlice = createSlice({
   name: 'exams',
@@ -123,18 +138,19 @@ const examsSlice = createSlice({
         state.error = action.error.message;
       })
 
-      // Handle delete exam actions
-      .addCase(deleteExam.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(deleteExam.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.exams = state.exams.filter((e) => e._id !== action.payload);
-      })
-      .addCase(deleteExam.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      });
+          // Handle delete exam and questions actions
+          .addCase(deleteExamAndQuestions.pending, (state) => {
+            state.status = 'loading';
+          })
+          .addCase(deleteExamAndQuestions.fulfilled, (state, action) => {
+            state.status = 'succeeded';
+            // Remove the deleted exam from the state
+            state.exams = state.exams.filter((exam) => exam._id !== action.payload);
+          })
+          .addCase(deleteExamAndQuestions.rejected, (state, action) => {
+            state.status = 'failed';
+            state.error = action.payload ? action.payload : 'Failed to delete exam and questions';
+          });
   },
 });
 

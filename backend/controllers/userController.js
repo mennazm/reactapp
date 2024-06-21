@@ -102,7 +102,7 @@ exports.getUserById = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    req.body.role = "user";
+    
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
