@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuestionById, clearSelectedQuestion } from '../../../store/questions/questionsSlice';
 import '../../../css/Questions/QuestionDetailsComp.css';
+import { IoIosArrowDropleftCircle } from "react-icons/io";
+
 
 
 
@@ -22,11 +24,11 @@ const QuestionDetailsComp = ({ questionId, onBack }) => {
   }, [dispatch, questionId]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <h3 className='alert alert-info container m-auto mt-5 w-75'>Loading...</h3>;
   }
 
   if (status === 'failed') {
-    return <div>{error}</div>;
+    return <h3 className='alert alert-info container m-auto mt-5 w-75'>{error}</h3>;
   }
 
   return (
@@ -34,10 +36,17 @@ const QuestionDetailsComp = ({ questionId, onBack }) => {
       <h3 className="question-details-title">Question Details</h3>
       {question ? (
         <div className="question-details-content">
-          <p><strong>Question:</strong> {question.question}</p>
-          <p><strong>Answer:</strong> {question.answer}</p>
-          <button onClick={onBack} className="question-details-button">Back to Questions</button>
-        </div>
+          <div className="chat-item">
+            <div className="question"><strong>Question:</strong> {question.question}</div>
+          </div>
+          <div className="chat-item">
+            <div className="answer"><strong>Answer:</strong> {question.answer}</div>
+          </div>
+          <div className="chat-item">
+            <div className="grade"><strong>Grade:</strong> {question.grade}</div>
+          </div>
+          <IoIosArrowDropleftCircle className="back-icon" onClick={onBack} />  
+            </div>
       ) : (
         <div className='h3 alert alert-danger'>No question details available</div>
       )}

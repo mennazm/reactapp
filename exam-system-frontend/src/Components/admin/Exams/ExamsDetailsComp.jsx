@@ -23,11 +23,11 @@ const ExamDetailsComp = ({ examId, onBack }) => {
   }, [dispatch, examId]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <h3 className='alert alert-info container m-auto mt-5 w-75'>Loading...</h3>;
   }
 
   if (status === 'failed') {
-    return <div>{error}</div>;
+    return <h3 className='alert alert-info container m-auto mt-5 w-75'>{error}</h3>;
   }
 
   const getQuestionDetails = (questionId) => {

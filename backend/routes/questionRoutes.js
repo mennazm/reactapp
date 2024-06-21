@@ -17,11 +17,14 @@ const questionController = require("../controllers/questionController");
  *             required:
  *               - question
  *               - answer
+ *               - grade
  *             properties:
  *               question:
  *                 type: string
  *               answer:
  *                 type: string
+ *               grade:
+ *                 type: number
  *     responses:
  *       201:
  *         description: Question created successfully
@@ -103,6 +106,8 @@ router.get("/:id", questionController.getQuestionById);
  *                 type: string
  *               answer:
  *                 type: string
+ *               grade:
+ *                 type: number
  *     responses:
  *       200:
  *         description: Question updated successfully
@@ -147,6 +152,8 @@ router.delete("/:id", questionController.deleteQuestion);
  *           type: string
  *         answer:
  *           type: string
+ *          grade:
+ *           type: number
  */
 
 module.exports = router;

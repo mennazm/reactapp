@@ -15,6 +15,9 @@ import {ExamList}from './Components/student/Exams/ExamList';
 import {TakeExam} from './Components/student/Exams/TakeExam';
 import {Results }from './Components/student/Exams/Results';
 import Register from './Auth/Register';
+import ResultsList from './Components/admin/Results/ResultsList';
+import StudentResults from './Components/user/StudentResults';
+
 
 
 
@@ -25,6 +28,9 @@ function App() {
       <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
       <Route path='/' element={<SharedLayout />}>
+      <Route path='admin/results' element={<ResultsList/>} />
+      
+      
           <Route
             index
             loader={fetchQuestions}
@@ -52,7 +58,7 @@ function App() {
           
 <Route path='*' element={<NotFoundedComp />} />
     </Route>
-    
+    <Route path='user/results' element={<StudentResults/>} />
     </>
     )
   );
