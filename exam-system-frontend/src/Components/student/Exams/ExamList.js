@@ -10,6 +10,7 @@ export function ExamList() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    
     const fetchExams = async () => {
       try {
         const response = await axiosInstance.get('/exams');

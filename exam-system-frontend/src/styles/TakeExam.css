@@ -1,37 +1,44 @@
 .container-fluid {
-    background-color: #f0f0f0;
-    min-height: 100vh;
-  }
+  background-color: #f0f0f0;
+  min-height: 100vh;
   
-  .container {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  }
+}
+
+.containerExam {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.question {
+  margin-bottom: 1.5rem;
+  width: 70vw;
+}
+#exam{
+  color: #093B56;
+}
+#time-left{
+   font-size: 11px;
+   color: #999 ;
+   margin-left: -2rem;
+}
+
+.question h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  margin-top: 0.75rem;
+}
+
+.btn {
+  padding: 7px 17px;
   
-  .question {
-    margin-bottom: 1.5rem;
-  }
-  
-  .question h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-  
-  .form-control {
-    margin-top: 0.75rem;
-  }
-  
-  .btn {
-    font-weight: bold;
-    padding: 0.5rem;
-    font-size: 1.25rem;
-    width: 100%;
-    margin-top: 1rem;
-  }
-  
-  .btn i {
-    margin-right: 0.5rem;
-  }
-  
+}
+
+.btn i {
+  margin-right: 0.5rem;
+}
+

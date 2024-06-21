@@ -324,6 +324,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axiosInstance from '../../../Api/ExamApi';
+import { MdTimer } from 'react-icons/md';
+import '../../../styles/TakeExam.css'
 
 export const TakeExam = () => {
   const { examId } = useParams();
