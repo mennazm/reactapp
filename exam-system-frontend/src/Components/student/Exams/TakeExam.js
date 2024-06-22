@@ -16,7 +16,7 @@ export const TakeExam = () => {
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(1800);
+  const [timeLeft, setTimeLeft] = useState(500);
   const [timerActive, setTimerActive] = useState(false);
   const navigate = useNavigate(); 
 
@@ -198,7 +198,7 @@ export const TakeExam = () => {
   }
 
   const { totalScore, gradedQuestions, correctAnswersCount } = calculateScore();
-  const passingScore = 80; 
+  const passingScore = 60; 
   const isPassed = totalScore >= passingScore;
 
   const scorePercentage = (totalScore / exam.score) * 100;
