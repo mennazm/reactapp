@@ -65,7 +65,7 @@ const ResultsList = () => {
 
   return (
     <div className="m-auto mt-5 All_exams">
-      <h3 className="my-4">students' results</h3>
+      <h3 className="my-4">Students' results</h3>
       {results.length === 0 ? (
         <div className="alert alert-info" role="alert">
           No results to show.

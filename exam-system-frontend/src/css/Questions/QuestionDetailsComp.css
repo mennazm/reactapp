@@ -31,7 +31,7 @@
   padding: 10px;
   border-radius: 8px;
   margin-right: auto;
-  width: 50%;
+  max-width: 50%;
 }
 
 .answer {

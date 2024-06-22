@@ -42,7 +42,7 @@ const QuestionDetailsComp = ({ questionId, onBack }) => {
           </div>
           <div className="chat-item">
             <div className="answer"><strong>Answer:</strong> {question.answer}</div>
-          </div>
+          </div><br/>
           <div className="chat-item">
             <div className="question"><strong>Grade:</strong> {question.grade}</div>
           </div><br/>
