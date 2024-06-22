@@ -10,6 +10,7 @@ const AddExamForm = ({ onSuccess }) => {
   const status = useSelector((state) => state.questions.status);
 
   const [name, setName] = useState('');
+  const [score, setScore] = useState('');
   const [selectedQuestions, setSelectedQuestions] = useState([]);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const AddExamForm = ({ onSuccess }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addNewExam({ name, questions: selectedQuestions }))
+    dispatch(addNewExam({ name, questions: selectedQuestions ,score}))
       .then(() => {
         onSuccess();
       });
@@ -46,6 +47,17 @@ const AddExamForm = ({ onSuccess }) => {
           value={name} 
           className="form-control"
           onChange={(e) => setName(e.target.value)} 
+          required 
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="examScore">Score:</label>
+        <input 
+          type="number" 
+          id="examScore"
+          value={score} 
+          className="form-control"
+          onChange={(e) => setScore(e.target.value)} 
           required 
         />
       </div>

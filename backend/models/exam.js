@@ -16,6 +16,10 @@ const examSchema = new mongoose.Schema({
     enum: ['available', 'unavailable'],
     default: 'unavailable',
   },
+  score:{
+    type: Number,
+    required: true,
+  }
 });
 
 const Exam = mongoose.model("Exam", examSchema);

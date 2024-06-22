@@ -8,6 +8,7 @@ import '../../../css/Exams/AddExamForm.css'
 const UpdateExamForm = ({ examToEdit, onSuccess, clearEdit }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState(examToEdit.name);
+  const [score, setScore] = useState(examToEdit.score);
   const [selectedQuestions, setSelectedQuestions] = useState([]);
 
   const allQuestions = useSelector(state => state.questions.questions);
@@ -28,7 +29,9 @@ const UpdateExamForm = ({ examToEdit, onSuccess, clearEdit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const questionsObjects = allQuestions.filter(q => selectedQuestions.includes(q._id));
-    dispatch(updateExam({ id: examToEdit._id, name, questions: questionsObjects }))
+    console.log('Updating exam with data:', { id: examToEdit._id, name, questions: questionsObjects, score });
+
+    dispatch(updateExam({ id: examToEdit._id, name, questions: questionsObjects ,score}))
       .then(() => {
         onSuccess();
       });
@@ -49,6 +52,18 @@ const UpdateExamForm = ({ examToEdit, onSuccess, clearEdit }) => {
           required 
         />
       </div>
+      <div className="form-group">
+      <label htmlFor="examScore">Score:</label>
+        <input 
+          type="number" 
+          value={score} 
+          className="form-control"
+           id="examScore"
+          onChange={(e) => setScore(e.target.value)} 
+          required 
+        />
+      </div>
+      
       <div className="form-group">
         <label>Questions:</label>
         {allQuestions && allQuestions.length > 0 ? (

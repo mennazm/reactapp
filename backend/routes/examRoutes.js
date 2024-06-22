@@ -21,6 +21,9 @@ const examController = require("../controllers/examController");
  *                 type: array
  *                 items:
  *                   type: string
+ *               score:
+ *                 type: number
+ *                 description: The total score for the exam
  *     responses:
  *       201:
  *         description: Exam created successfully
@@ -90,6 +93,9 @@ router.get("/:id", examController.getExam);
  *                 type: array
  *                 items:
  *                   type: string
+ *               score:
+ *                 type: number
+ *                 description: The total score for the exam
  *     responses:
  *       200:
  *         description: Exam updated successfully
@@ -124,7 +130,6 @@ router.put("/:id", examController.updateExam);
  *         description: Server error
  */
 router.post("/:examId/questions/:questionId", examController.addQuestionToExam);
-
 
 /**
  * @openapi

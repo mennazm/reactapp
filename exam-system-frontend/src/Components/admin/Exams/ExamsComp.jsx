@@ -100,6 +100,7 @@ const ExamsComp = () => {
                 <th>Exam Name</th>
                 <th>Questions</th>
                 <th>Avaliable</th>
+                <th>Score</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -117,6 +118,8 @@ const ExamsComp = () => {
                         onChange={() => handleStatusChange(exam._id, exam.status)}
                       />
                     </td>
+                    <td>{exam.score}</td>
+
                     <td>
                       <button onClick={() => { setEditExam(exam); setShowUpdateForm(true); }} className="btn btn-outline-primary btn-sm me-2">
                         <BiPencil />

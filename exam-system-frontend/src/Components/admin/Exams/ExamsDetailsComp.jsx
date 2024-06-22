@@ -42,6 +42,7 @@ const ExamDetailsComp = ({ examId, onBack }) => {
       <hr className='custom-hr'/> <br/>
       {exam ? (
         <div className="exam-details-content">
+          <p><strong>Score:</strong> {exam.score}</p>
           <p><strong>Questions:</strong></p>
           <ol>
             {exam.questions.map((question) => (

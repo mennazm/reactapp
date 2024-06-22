@@ -1,8 +1,8 @@
 const Exam = require("../models/exam");
 
 exports.createExam = async (req, res) => {
-  const { name, questions,status } = req.body;
-  const exam = new Exam({ name, questions,status });
+  const { name, questions,status ,score} = req.body;
+  const exam = new Exam({ name, questions,status,score });
   const result = await exam.save();
   res.status(201).json(result);
 };
@@ -27,15 +27,18 @@ exports.getExam = async (req, res) => {
 };
 
 exports.updateExam = async (req, res) => {
-  const { name, questions,status } = req.body;
+  const { name, questions, status, score } = req.body;
   const { id } = req.params;
   try {
     const exam = await Exam.findByIdAndUpdate(
       id,
-      { name, questions,status },
+      { name, questions, status, score },
       { new: true }
     );
-    res.status(204).json(exam);
+    if (!exam) {
+      return res.status(404).json({ error: 'Exam not found' });
+    }
+    res.status(200).json(exam); 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
